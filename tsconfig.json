@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // 최신 ES2020 기능 사용
+    "useDefineForClassFields": true, // 클래스 필드 초기화 방식 설정
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // 브라우저 및 최신 ES 기능 포함
+    "module": "ESNext", // ESNext 모듈 사용
+    "moduleResolution": "bundler", // Node.js 모듈 해석 방식
+    "skipLibCheck": true, // 라이브러리 타입 검사 건너뜀
+    "baseUrl": ".", // 프로젝트 루트를 기준으로 경로 설정
+    "paths": {
+      "@/*": ["src/*"] // 경로 별칭 설정
+    },
+    "resolveJsonModule": true, // JSON 모듈 가져오기 허용
+    "isolatedModules": true, // 각 파일을 독립적으로 처리
+    "noEmit": true, // 컴파일 결과물을 생성하지 않음
+    "jsx": "react-jsx", // React JSX 지원
+    "strict": true, // 엄격한 타입 검사
+    "noUnusedLocals": true, // 사용되지 않는 지역 변수 경고
+    "noUnusedParameters": true, // 사용되지 않는 매개변수 경고
+    "noFallthroughCasesInSwitch": true, // switch 문에서 누락된 경우 방지
+    "allowJs": true, // JavaScript 파일 허용
+    "esModuleInterop": true, // ES 모듈 호환성 활성화
+    "forceConsistentCasingInFileNames": true, // 파일 이름 대소문자 일관성 검사
+    "checkJs": false, // JavaScript 파일 타입 검사 비활성화
+    "typeRoots": ["./node_modules/@types", "./src/types"], // 타입 정의 경로
+    "types": ["node", "vite/client"], // Node.js 및 Vite 타입 정의 포함
+    "allowSyntheticDefaultImports": true, // 기본값 가져오기 허용
+    "allowImportingTsExtensions": true // TS 확장자 가져오기 허용
+  },
+  "include": ["src"], // 포함할 파일
+  "references": [{ "path": "./tsconfig.node.json" }], // 참조할 파일
+  "exclude": ["node_modules", "dist"] // 제외할 파일 및 폴더
+}

@@ -1,0 +1,69 @@
+#root {
+  @apply min-h-screen flex flex-col;
+}
+
+.carousel .slide img {
+  @apply max-h-[600px] object-cover;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 다크 모드에서 스크롤바 색상 변경 */
+.dark ::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4a5568;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #718096;
+}
+
+/* 폰트 부드럽게 처리 */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 포커스 스타일 지정 */
+*:focus {
+  outline: 2px solid rgba(66, 153, 225, 0.5);
+  outline-offset: 2px;
+}
+
+/* 다크 모드 트랜지션 */
+html {
+  transition: background-color 0.3s ease;
+}
+
+/* 장바구니 항목 애니메이션 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cart-item-enter {
+  animation: fadeIn 0.3s ease forwards;
+}
