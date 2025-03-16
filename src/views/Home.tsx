@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { Helmet } from 'react-helmet-async';
 import { useProducts } from "@/hooks/useProducts";
-import ProductsList from "@/components/products/ProductsList";
+import ProductsList from "@/components/ProductList";
 import Slider from "@/components/common/Slider";
-import ErrorBoundary from "@/components/common/ErrorBoundary";
+import { ErrorBoundary } from "@/components/common/ErrorBoundary";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,6 +15,11 @@ const Home = () => {
 
   return (
     <ErrorBoundary>
+      <Helmet>
+        <title>React Shop</title>
+        <meta name="description" content="React와 TailwindCSS로 만든 쇼핑몰입니다." />
+      </Helmet>
+      
       <div className="container mx-auto p-10">
         <Slider />
         <div className="flex justify-center mt-6 space-x-4">

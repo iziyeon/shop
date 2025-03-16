@@ -1,14 +1,12 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import { Helmet } from 'react-helmet-async';
 
-import { useProduct } from '../hooks/useProducts';
 import { cartState } from '../recoil/cart';
+import { useProduct } from '../hooks/useProducts'; // 올바른 경로로 수정
 import LoadingSpinner from '../components/common/LoadingSpinner';
-import Rating from '../components/common/Rating';
-import Breadcrumbs from '../components/common/Breadcrumbs';
+import { Product as ProductType } from '../types';
 
 const Product = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,8 +15,10 @@ const Product = () => {
   const [cart, setCart] = useRecoilState(cartState);
   
   const { data: product, isLoading, error } = useProduct(id);
-
-  if (isLoading) return <LoadingSpinner />;
+  
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   
   if (error) {
     return (
@@ -56,86 +56,57 @@ const Product = () => {
       // 장바구니에 새로 추가
       setCart([...cart, { id: product.id, product, quantity }]);
     }
-    
-    toast.success('장바구니에 상품이 추가되었습니다!');
   };
-
+  
   return (
-    <>
-      <Breadcrumbs />
-      <div className="container mx-auto px-4 py-10">
-        <Helmet>
-          <title>{product.title} | React Shop</title>
-        </Helmet>
+    <div className="container mx-auto px-4 py-8">
+      <Helmet>
+        <title>{product.title} | React Shop</title>
+        <meta name="description" content={product.description.substring(0, 160)} />
+      </Helmet>
+      
+      <div className="flex flex-col md:flex-row gap-8">
+        {/* 상품 이미지 */}
+        <div className="md:w-1/2">
+          <img 
+            src={product.image} 
+            alt={product.title}
+            className="w-full h-auto object-contain max-h-[500px]" 
+          />
+        </div>
         
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* 제품 이미지 - 배경색을 항상 흰색으로 설정 */}
-          <div className="md:w-1/2 h-96 bg-white rounded-lg overflow-hidden shadow-sm">
-            <img 
-              src={product.image} 
-              alt={product.title}
-              className="w-full h-full object-contain p-8" 
+        {/* 상품 정보 */}
+        <div className="md:w-1/2">
+          <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
+          <p className="text-gray-500 mb-4">{product.category}</p>
+          <div className="flex items-center mb-4">
+            <span className="text-yellow-400 mr-1">★</span>
+            <span>{product.rating.rate} ({product.rating.count} 리뷰)</span>
+          </div>
+          <p className="text-xl font-bold mb-4">${product.price.toFixed(2)}</p>
+          <p className="text-gray-700 mb-6">{product.description}</p>
+          
+          <div className="flex items-center mb-6">
+            <label htmlFor="quantity" className="mr-4">수량:</label>
+            <input 
+              type="number" 
+              id="quantity" 
+              min="1" 
+              value={quantity} 
+              onChange={handleQuantityChange} 
+              className="w-16 p-2 border rounded text-center dark:bg-gray-700 dark:border-gray-600"
             />
           </div>
           
-          {/* 제품 정보 */}
-          <div className="md:w-1/2">
-            <h1 className="text-2xl font-bold mb-4">{product.title}</h1>
-            
-            <div className="mb-4">
-              <Rating 
-                value={product.rating.rate}
-                count={product.rating.count}
-                size="lg"
-              />
-            </div>
-            
-            <p className="text-3xl font-bold text-primary mb-6">
-              ${product.price.toFixed(2)}
-            </p>
-            
-            <p className="text-gray-600 dark:text-gray-300 mb-8">
-              {product.description}
-            </p>
-            
-            <div className="flex items-center mb-6">
-              <label htmlFor="quantity" className="mr-4">수량:</label>
-              <input
-                type="number"
-                id="quantity"
-                min="1"
-                value={quantity}
-                onChange={handleQuantityChange}
-                className="w-16 p-1 border rounded text-center dark:bg-gray-700 dark:border-gray-600"
-              />
-            </div>
-            
-            <div className="flex flex-wrap gap-3">
-              <button
-                onClick={addToCart}
-                className="btn btn-primary"
-              >
-                장바구니에 추가
-              </button>
-              
-              <button
-                onClick={() => navigate('/cart')}
-                className="btn btn-outline"
-              >
-                장바구니로 이동
-              </button>
-            </div>
-            
-            <div className="mt-8">
-              <h3 className="font-semibold mb-2">카테고리:</h3>
-              <span className="inline-block bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full text-sm">
-                {product.category}
-              </span>
-            </div>
-          </div>
+          <button 
+            onClick={addToCart}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded transition"
+          >
+            장바구니에 담기
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

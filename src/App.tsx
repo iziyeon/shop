@@ -1,53 +1,50 @@
-import { Suspense, lazy } from 'react';
-import { RecoilRoot } from 'recoil';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Suspense } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
-import { ThemeProvider } from './contexts/ThemeContext'; // 상대 경로로 변경
+import { ThemeProvider } from './contexts/ThemeContext';
 import { ROUTES } from './config/constants';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
+import MainLayout from './layouts/MainLayout'; // 경로 확인
 import './App.css';
 
-// 지연 로딩을 사용한 페이지 임포트
-const Home = lazy(() => import('./pages/Home'));
-const Product = lazy(() => import('./pages/Product'));
-const Category = lazy(() => import('./pages/Category'));
-const Cart = lazy(() => import('./pages/Cart'));
-const SearchPage = lazy(() => import('./pages/SearchPage'));
-const NotFound = lazy(() => import('./pages/NotFound'));
+import Home from './pages/Home';
+import Product from './pages/Product';
+import Cart from './pages/Cart';
+import Category from './pages/Category';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <RecoilRoot>
-      <ThemeProvider>
-        <ErrorBoundary>
-          <Helmet>
-            <title>React Shop</title>
-            <meta name="description" content="React와 TailwindCSS로 만든 쇼핑몰입니다." />
-          </Helmet>
+    <ThemeProvider>
+      <ErrorBoundary>
+        <Helmet>
+          <title>React Shop</title>
+          <meta name="description" content="React와 TailwindCSS로 만든 쇼핑몰입니다." />
+        </Helmet>
 
-          <BrowserRouter>
-            <Header />
-            <main className="min-h-screen pt-16 pb-16">
-              <Suspense fallback={<LoadingSpinner />}>
-                <Routes>
-                  <Route path={ROUTES.HOME} element={<Home />} />
-                  <Route path={ROUTES.PRODUCT} element={<Product />} />
-                  <Route path={ROUTES.CATEGORY} element={<Category />} />
-                  <Route path={ROUTES.CART} element={<Cart />} />
-                  <Route path="/search" element={<SearchPage />} />
+        <Router>
+          <Header />
+          <main className="min-h-screen pt-16 pb-16">
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
+                <Route path="/" element={<MainLayout />}>
+                  <Route index element={<Home />} />
+                  <Route path="product/:id" element={<Product />} />
+                  <Route path="category/:category" element={<Category />} />
+                  <Route path="cart" element={<Cart />} />
                   <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-            </main>
-            <Footer />
-          </BrowserRouter>
-        </ErrorBoundary>
-      </ThemeProvider>
-    </RecoilRoot>
+                </Route>
+              </Routes>
+            </Suspense>
+          </main>
+          <Footer />
+        </Router>
+      </ErrorBoundary>
+    </ThemeProvider>
   );
 }
 

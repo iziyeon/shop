@@ -12,11 +12,11 @@ export default function ProductCard({ product }: ProductCardProps) {
       className="card bg-base-100 hover:shadow-xl transition-shadow"
     >
       <figure className="relative w-full pt-[100%]">
-        <div className="absolute inset-0 bg-white dark:bg-white"> {/* 다크모드에서도 흰색 배경 유지 */}
+        <div data-theme="light" className="absolute inset-0 flex items-center justify-center p-4 bg-white">
           <img
             src={product.image}
             alt={product.title}
-            className="w-full h-full object-contain p-4"
+            className="max-w-full max-h-full object-contain"
           />
         </div>
       </figure>

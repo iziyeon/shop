@@ -19,12 +19,21 @@ export const APP_CONFIG = {
   }
 } as const;
 
+// 카테고리 상수
 export const CATEGORY = {
-  ALL: '',
   ELECTRONICS: 'electronics',
   JEWELRY: 'jewelery',
-  MEN_CLOTHING: "men's clothing",
-  WOMEN_CLOTHING: "women's clothing",
+  MEN_CLOTHING: "men's clothing", 
+  WOMEN_CLOTHING: "women's clothing"
+};
+
+// 카테고리 제목 매핑
+export const CATEGORY_TITLE = {
+  'electronics': '전자제품',
+  'jewelery': '주얼리',
+  "men's clothing": '남성 의류',
+  "women's clothing": '여성 의류',
+  '': '전체 상품'
 };
 
 export const ROUTES = {
@@ -33,12 +42,4 @@ export const ROUTES = {
   CATEGORY: '/category/:category',
   CART: '/cart',
   SEARCH: '/search',
-};
-
-export const CATEGORY_TITLE: { [key: string]: string } = {
-  [CATEGORY.ALL]: '전체 상품',
-  [CATEGORY.ELECTRONICS]: '전자제품',
-  [CATEGORY.JEWELRY]: '쥬얼리',
-  [CATEGORY.MEN_CLOTHING]: '남성의류',
-  [CATEGORY.WOMEN_CLOTHING]: '여성의류',
 };

@@ -10,7 +10,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">React Shop</h3>
 
             <div className="flex space-x-4">
-              <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub">
+              <a href="https://github.com/iziyeon/shop" target="_blank" rel="noreferrer" aria-label="GitHub">
                 <i className="fab fa-github text-gray-300 hover:text-white text-xl"></i>
               </a>
               <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">

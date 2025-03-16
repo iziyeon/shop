@@ -1,14 +1,28 @@
-import { useProducts } from '../hooks/useProducts';
+import { useProducts } from '@/hooks/useProducts';
 import ProductCard from './ProductCard';
 import LoadingSpinner from './common/LoadingSpinner';
+import { Product } from '@/types';
 
 interface ProductListProps {
   category?: string;
   limit?: number;
+  products?: Product[]; // 외부에서 상품 목록을 직접 전달 가능하게 함
+  isLoading?: boolean;   // 로딩 상태를 외부에서 관리 가능하게 함
 }
 
-const ProductList = ({ category = '', limit }: ProductListProps) => {
-  const { data: products, isLoading, error } = useProducts(category);
+const ProductList = ({ 
+  category = '', 
+  limit,
+  products: externalProducts,
+  isLoading: externalLoading
+}: ProductListProps) => {
+  // 외부에서 products와 isLoading을 받지 않은 경우에만 훅 사용
+  const { data: internalProducts, isLoading: internalLoading, error } = 
+    !externalProducts ? useProducts(category) : { data: undefined, isLoading: false, error: null };
+  
+  // 외부/내부 데이터 소스 통합
+  const products = externalProducts || internalProducts;
+  const isLoading = externalLoading !== undefined ? externalLoading : internalLoading;
 
   if (isLoading) {
     return <LoadingSpinner />;

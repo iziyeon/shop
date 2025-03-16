@@ -25,7 +25,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           : item
       ));
     } else {
-      setCart([...cart, { ...product, quantity }]);
+      setCart([...cart, { id: product.id, product: { ...product }, quantity }]);
     }
     success('장바구니에 추가되었습니다');
   };
@@ -44,7 +44,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       <div className="md:w-1/2 space-y-4">
         <div className="badge badge-outline">{product.category}</div>
         <h1 className="text-3xl font-bold">{product.title}</h1>
-        <Rating value={product.rating.rate} reviews={product.rating.count} />
+        <Rating value={product.rating.rate} />
         <p className="text-gray-600">{product.description}</p>
         <p className="text-3xl font-bold">{formatPrice(product.price)}</p>
         <div className="flex items-center gap-4">

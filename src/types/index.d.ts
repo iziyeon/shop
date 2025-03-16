@@ -15,11 +15,10 @@ declare module "*.png" {
 }
 
 // 추가적인 타입 선언 통합
+// Custom type declaration for 'daisyui'
 declare module 'daisyui' {
-  export interface DaisyUIConfig {
-    themes?: string[];
-    darkTheme?: string;
-  }
+  const daisyui: any;
+  export default daisyui;
 }
 
 declare module 'daisyui';
@@ -64,6 +63,23 @@ export interface Product {
   };
 }
 
-export interface CartItem extends Product {
+export interface CartItem {
+  id: number;
+  product: Product;
   quantity: number;
+}
+
+// 장바구니 통계 타입 정의
+export interface CartStats {
+  totalItems: number;
+  totalAmount: number;
+  isEmpty: boolean;
+}
+
+// 장바구니 합계 타입 정의
+export interface CartTotal {
+  subtotal: number;
+  shipping: number;
+  tax: number;
+  total: number;
 }

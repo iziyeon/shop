@@ -17,7 +17,6 @@ const LazyImage = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    // 이미지를 미리 로드
     const img = new Image();
     img.src = src;
     img.onload = () => {
@@ -26,7 +25,6 @@ const LazyImage = ({
     };
     img.onerror = () => {
       console.error(`Failed to load image: ${src}`);
-      // 오류 시 플레이스홀더 유지
     };
   }, [src]);
 
