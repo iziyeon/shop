@@ -97,21 +97,11 @@ react-shop/
 └── vite.config.ts
 ```
 
-## 📱 스크린샷
-
-![홈페이지](screenshot-home.png)
-![제품 목록](screenshot-products.png)
-![제품 상세](screenshot-detail.png)
-![장바구니](screenshot-cart.png)
-
 ## 🔍 API 참조
 
 이 프로젝트는 [Fake Store API](https://fakestoreapi.com/)를 사용합니다.
 
-## 🤝 기여하기
-
-이슈를 발견하셨거나 기능 제안이 있으시면 이슈를 등록해주세요.
-
+## 🤝 
 1. Fork 하기
 2. 새 브랜치 생성 (`git checkout -b feature/amazing-feature`)
 3. 변경사항 커밋 (`git commit -m 'Add some amazing feature'`)
@@ -119,7 +109,6 @@ react-shop/
 5. Pull Request 열기
 
 ## 📄 라이선스
-
 이 프로젝트는 MIT 라이선스를 따릅니다.
 
 ## 👨‍💻 제작자
