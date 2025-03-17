@@ -104,9 +104,6 @@ react-shop/
 - 대체 텍스트 제공
 - 색상 대비 최적화
 
-  ## 주소
-  - https://shop-plum-five.vercel.app/
-
 ## 브라우저 지원
 - Chrome (최신 2개 버전)
 - Firefox (최신 2개 버전)
@@ -119,3 +116,6 @@ react-shop/
 3. 변경사항 커밋 (`git commit -m 'Add some amazing feature'`)
 4. 브랜치에 푸시 (`git push origin feature/amazing-feature`)
 5. Pull Request 개설
+
+## 주소
+- https://shop-plum-five.vercel.app/
